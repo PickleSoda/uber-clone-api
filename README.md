@@ -311,7 +311,7 @@ node-template-server/
 │   │   │   └── presentation/
 │   │   │       └── middlewares/
 │   │   │
-│   │   ├── todos/
+│   │   ├── trip/
 │   │   │   ├── domain/
 │   │   │   │   ├── datasources/
 │   │   │   │   ├── dtos/
