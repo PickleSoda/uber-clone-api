@@ -2,7 +2,7 @@
 
 import { Router } from 'express';
 
-import { TodoDatasourceImpl, TodoRepositoryImpl } from '../infraestructure';
+import { TodoDatasourceImpl, TodoRepositoryImpl } from '../infrastructure';
 import { TodoController } from './controller';
 import { AuthDatasourceImpl, AuthMiddleware, AuthRepositoryImpl } from '../../auth';
 

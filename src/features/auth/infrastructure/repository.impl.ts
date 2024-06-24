@@ -1,4 +1,4 @@
-// src/features/auth/infraestructure/repository.impl.ts
+// src/features/auth/infrastructure/repository.impl.ts
 
 import {
 	type RegisterUserDto,

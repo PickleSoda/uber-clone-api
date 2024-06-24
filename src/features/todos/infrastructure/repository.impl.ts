@@ -1,4 +1,4 @@
-// src\features\todos\infraestructure\repository.impl.ts
+// src\features\todos\infrastructure\repository.impl.ts
 
 import { type PaginationDto, type PaginationResponseEntity } from '../../shared';
 

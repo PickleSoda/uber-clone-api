@@ -1,4 +1,4 @@
-// src/features/auth/infraestructure/local.datasource.impl.ts
+// src/features/auth/infrastructure/local.datasource.impl.ts
 
 import { AppError, ONE, basicEncript, basicJWT } from '../../../core';
 import { type RegisterUserDto, type AuthDatasource, UserEntity, AuthEntity, type LoginUserDto } from '../domain';
