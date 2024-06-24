@@ -7,10 +7,15 @@ For the clean architecture setup, it's essential to identify the subdomains and 
 Subdomains
 
     Trip Management: Handling trip lifecycle, including creation, updates, and termination.
+
     User Management: Handling user profiles, authentication, and authorization.
-    Payment Processing: Managing payment methods and processing payments.
-    Notifications: Sending alerts and messages to users.
-    Reporting: Generating reports for admin users about usage and activity.
+    
+	Payment Processing: Managing payment methods and processing payments.
+    
+	Notifications: Sending alerts and messages to users.
+    
+	Reporting: Generating reports for admin users about usage and activity.
+
 ```bash
 
                     +------------------------------------+
@@ -95,30 +100,43 @@ Subdomains
 +---------------------------------+
 
 ```
-# Use Case Diagram:
 
-```bash
-          +-----------------------------+
-          |          System             |
-          +-----------------------------+
-               |             |
-    [Passenger]         [Driver]
-               |             |
-  +-----------+  +--------+  +--------+
-  | Create Trip|  | Accept Trip|  | Complete Trip|
-  +-----------+  +--------+  +--------+
-```
 
 # Sequence Diagram for Trip Creation:
 
 
 ```bash
 
-Passenger -> System: Request Trip (CreateTripDto)
-System -> TripEntity: Create Trip
-System -> Driver: Notify Trip Request
-Driver -> System: Accept Trip
-System -> Passenger: Confirm Trip Start
++------------+     +----------+     +---------+     +-----------+
+| Passenger  |     |  System  |     |  Driver  |     | Payment   |
+|            |     |          |     |         |     | Service   |
++------------+     +----------+     +---------+     +-----------+
+       |                |                |                 |
+       |---Request Trip----------------->|                 |
+       |                |                |                 |
+       |                |<--Validate Request--------------|
+       |                |                |                 |
+       |                |---Search for Drivers------------>|
+       |                |                |                 |
+       |                |                |<--Accept Trip---|
+       |                |                |                 |
+       |<--Confirm Trip------------------------------------|
+       |                |                |                 |
+       |                |---Notify Driver----------------->|
+       |                |                |                 |
+       |                |                |--Start Trip---->|
+       |                |                |                 |
+       |                |                |--End Trip------>|
+       |                |                |                 |
+       |                |<--Process Payment---------------|
+       |                |                |                 |
+       |                |---Notify Payment---------------->|
+       |                |                |                 |
+       |---Rate Trip-------------------------------------->|
+       |                |                |<--Rate Passenger-|
+       |                |                |                 |
+       |                |---Send Notifications------------>|
+       |                |                |                 |
 
 ```
 
