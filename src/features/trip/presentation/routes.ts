@@ -8,7 +8,7 @@ export class TripRoutes {
 	static get routes(): Router {
 		const router = Router();
 		const datasource = new TripDatasourceImpl();
-		const repository = new TripRepositoryImpl(datasource); // Assuming that TripRepositoryImpl doesn't need additional dependencies.
+		const repository = new TripRepositoryImpl(datasource);
 		const controller = new TripController(repository);
 
 		router.post('/', controller.create);

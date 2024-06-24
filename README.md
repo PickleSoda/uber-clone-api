@@ -1,4 +1,70 @@
-# Node Template REST API
+# Uber Clone REST API
+
+Class Diagram for the Trip Feature:
+
+```bash
++---------------------------------+
+|          TripEntity             |
++---------------------------------+
+| - id: string                    |
+| - currentLatitude: number       |
+| - currentLongitude: number      |
+| - destinationLatitude: number   |
+| - destinationLongitude: number  |
+| - createdAt: Date               |
+| - passengerName: string         |
+| - passengerPhone: string        |
+| - currentPlaceName: string      |
+| - destinationPlaceName: string  |
+| - vehicleType: string           |
+| - vehicleLicensePlate: string   |
+| - driverName: string            |
+| - status: TripStatusType        |
++---------------------------------+
+| + fromJson(json: object): TripEntity |
++---------------------------------+
+           ^   |
+           |   | Inherits
+           |   |
++---------------------------------+
+|          CreateTripDto          |
++---------------------------------+
+| <<static>> create(object: object): CreateTripDto |
++---------------------------------+
+
++---------------------------------+
+|          UpdateTripDto          |
++---------------------------------+
+| <<static>> create(object: object): UpdateTripDto |
++---------------------------------+
+
+```
+ Use Case Diagram:
+
+```bash
+          +-----------------------------+
+          |          System             |
+          +-----------------------------+
+               |             |
+    [Passenger]         [Driver]
+               |             |
+  +-----------+  +--------+  +--------+
+  | Create Trip|  | Accept Trip|  | Complete Trip|
+  +-----------+  +--------+  +--------+
+```
+
+Sequence Diagram for Trip Creation:
+
+
+```bash
+
+Passenger -> System: Request Trip (CreateTripDto)
+System -> TripEntity: Create Trip
+System -> Driver: Notify Trip Request
+Driver -> System: Accept Trip
+System -> Passenger: Confirm Trip Start
+
+```
 
 This reporsitory contains a template for projects with Node, Express, Typescript. The test environment has been configured using Jest, and ESLint and Prettier have been integrated to set code style definitions. You can find the step-by-step construction of this project in this article:
 
