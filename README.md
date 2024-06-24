@@ -1,6 +1,62 @@
 # Uber Clone REST API
 
-Class Diagram for the Trip Feature:
+# Use Case Diagram:
+Subdomains and Bounded Contexts
+
+For the clean architecture setup, it's essential to identify the subdomains and bounded contexts of the application. These will help in defining the scope of different modules and their interactions.
+Subdomains
+
+    Trip Management: Handling trip lifecycle, including creation, updates, and termination.
+    User Management: Handling user profiles, authentication, and authorization.
+    Payment Processing: Managing payment methods and processing payments.
+    Notifications: Sending alerts and messages to users.
+    Reporting: Generating reports for admin users about usage and activity.
+```bash
+
+                    +------------------------------------+
+                    |              System                |
+                    +------------------------------------+
+                           |                |
+            [Passenger]            [Driver]              [Admin]
+                 |                  |                     |
+      +---------+---------+  +-----+-----+  +-------------+
+      |Create Trip        |  |Accept Trip|  |Manage Users |
+      |Cancel Trip        |  |Complete Trip|  |View Reports |
+      |Rate Trip          |  |Update Status|  +-------------+
+      |View Trip History  |  +-------------+
+      |Add Payment Method |         | 
+      +-------------------+         |
+               |                   | 
+               +------> [System] <----+
+                        |Send Notifications|
+                        +------------------+
+```
+
+# Elaborated Diagram of Subdomains and Bounded Contexts:
+
+```bash
+
++-------------------------------------------------------------+
+|                           System                            |
+|                                                             |
+| +-------------------+  +-------------------+  +-----------+ |
+| | Trip Management   |  | User Management   |  | Payment   | |
+| | - Trip Context    |  | - User Context    |  | - Payment | |
+| |                   |  |                   |  | Context   | |
+| +-------------------+  +-------------------+  +-----------+ |
+|           |                             |           |       |
+| +-------------------+                   | +-----------------+
+| | Notifications     |                   | | Reporting       |
+| | - Notification    |                   | | - Report Context|
+| | Context           |                   | |                 |
+| +-------------------+                   | +-----------------+
++-------------------------------------------------------------+
+
+
+```
+
+
+# Class Diagram for the Trip Feature:
 
 ```bash
 +---------------------------------+
@@ -39,7 +95,7 @@ Class Diagram for the Trip Feature:
 +---------------------------------+
 
 ```
- Use Case Diagram:
+# Use Case Diagram:
 
 ```bash
           +-----------------------------+
@@ -53,7 +109,7 @@ Class Diagram for the Trip Feature:
   +-----------+  +--------+  +--------+
 ```
 
-Sequence Diagram for Trip Creation:
+# Sequence Diagram for Trip Creation:
 
 
 ```bash
