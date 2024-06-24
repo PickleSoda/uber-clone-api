@@ -18,7 +18,16 @@ export class TripEntity {
 		public vehicleLicensePlate: string,
 		public driverName: string,
 		public status: TripStatusType = TripStatus.PENDING
-	) {}
+	) {
+		this.validate(this);
+	}
+
+	public validate(entity: TripEntity): void {
+		const errors: string[] = [];
+		if (!entity.passengerName || entity.passengerName.length === ZERO) {
+			errors.push('Passenger name is required');
+		}
+	}
 
 	public static fromJson(obj: Record<string, unknown>): TripEntity {
 		const {

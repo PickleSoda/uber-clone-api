@@ -4,7 +4,7 @@ import { type Server as ServerHttp, type IncomingMessage, type ServerResponse } 
 import express, { type Router, type Request, type Response, type NextFunction } from 'express';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
-
+import cors from 'cors';
 import { HttpCode, ONE_HUNDRED, ONE_THOUSAND, SIXTY, AppError } from './core';
 import { CustomMiddlewares, ErrorMiddleware } from './features/shared';
 
@@ -48,7 +48,7 @@ export class Server {
 		// CORS
 		this.app.use((req, res, next) => {
 			// Add your origins
-			const allowedOrigins = ['http://localhost:3000'];
+			const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
 			const origin = req.headers.origin;
 			// TODO: Fix this
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -60,7 +60,12 @@ export class Server {
 			res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 			next();
 		});
+		const corsOptions = {
+			origin: 'http://localhost:3001', // Replace with your React Native app's origin
+			optionsSuccessStatus: 200
+		};
 
+		this.app.use(cors(corsOptions));
 		//* Routes
 		this.app.use(this.apiPrefix, this.routes);
 
